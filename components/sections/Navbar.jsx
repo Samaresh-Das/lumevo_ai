@@ -44,9 +44,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16 md:h-18">
           {/* Logo */}
           <a href="/" className="flex items-center gap-2 shrink-0">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[var(--accent-violet)] to-[var(--accent-teal)] flex items-center justify-center">
-              <span className="text-white font-bold text-sm" style={{ fontFamily: 'var(--font-display)' }}>L</span>
-            </div>
+            <img src="/lemuvoai.png" alt="Lumevo AI Logo" className="w-10 h-10 object-contain rounded-full" />
             <span
               className="text-white font-bold text-lg tracking-tight"
               style={{ fontFamily: "var(--font-display)" }}

@@ -170,15 +170,13 @@ export default function RadialOrbitalTimeline({
           }}
         >
           {/* Central Core */}
-          <div className="absolute w-20 h-20 rounded-full bg-gradient-to-br from-[var(--accent-violet)] via-[#3b82f6] to-[var(--accent-teal)] animate-pulse flex items-center justify-center z-10 shadow-[0_0_40px_rgba(123,97,255,0.4)]">
+          <div className="absolute w-24 h-24 flex items-center justify-center z-10">
             <div className="absolute w-28 h-28 rounded-full border border-[var(--accent-violet)]/30 animate-ping opacity-70"></div>
             <div
               className="absolute w-36 h-36 rounded-full border border-[var(--accent-teal)]/20 animate-ping opacity-50"
               style={{ animationDelay: "0.5s" }}
             ></div>
-            <div className="w-12 h-12 rounded-full bg-[var(--surface)] backdrop-blur-md border border-[var(--border-default)] flex items-center justify-center text-xs font-bold text-white shadow-inner">
-              <span style={{ fontFamily: 'var(--font-display)' }}>L</span>
-            </div>
+            <img src="/lemuvoai.png" alt="Logo" className="w-20 h-20 object-contain rounded-full shadow-[0_0_40px_rgba(123,97,255,0.6)]" />
           </div>
 
           {/* Orbit Ring */}

@@ -56,9 +56,7 @@ export default function Footer() {
           {/* Brand Column */}
           <div className="lg:col-span-2">
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[var(--accent-violet)] to-[var(--accent-teal)] flex items-center justify-center">
-                <span className="text-white font-bold text-sm" style={{ fontFamily: "var(--font-display)" }}>L</span>
-              </div>
+              <img src="/lemuvoai.png" alt="Lumevo AI Logo" className="w-10 h-10 object-contain rounded-full" />
               <span className="text-white font-bold text-lg" style={{ fontFamily: "var(--font-display)" }}>Lumevo AI</span>
             </div>
             <p className="text-[var(--text-secondary)] text-sm leading-relaxed mb-6 max-w-xs">
