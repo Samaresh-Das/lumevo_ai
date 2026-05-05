@@ -16,7 +16,11 @@ const manrope = Manrope({
 });
 
 export const metadata = {
-  title: "Lumevo AI — AI Cover Letter Generator & Automated Social Media Posting",
+  metadataBase: new URL("https://lumevo.ai"),
+  title: {
+    default: "Lumevo AI — AI Cover Letter Generator & Automated Social Media Posting",
+    template: "%s | Lumevo AI",
+  },
   description:
     "CovGen writes ATS-ready cover letters in seconds. DailyContent posts to LinkedIn & Instagram for you. Meet your AI productivity suite — Lumevo AI.",
   keywords: [
@@ -34,10 +38,34 @@ export const metadata = {
     "CovGen AI",
     "DailyContent AI",
   ],
+  alternates: {
+    canonical: "/",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   openGraph: {
     title: "Lumevo AI — AI Cover Letter Generator & Automated Social Media Posting",
     description:
       "CovGen writes ATS-ready cover letters in seconds. DailyContent posts to LinkedIn & Instagram for you.",
+    url: "https://lumevo.ai",
+    siteName: "Lumevo AI",
+    images: [
+      {
+        url: "/og-image.png", // Assuming this will be added later
+        width: 1200,
+        height: 630,
+        alt: "Lumevo AI — AI Productivity Suite",
+      },
+    ],
     type: "website",
     locale: "en_US",
   },
@@ -46,6 +74,8 @@ export const metadata = {
     title: "Lumevo AI — AI Cover Letters & Automated Social Posting",
     description:
       "CovGen writes ATS-ready cover letters in seconds. DailyContent posts for you. Meet Lumevo AI.",
+    images: ["/og-image.png"],
+    creator: "@lumevo_ai",
   },
 };
 
