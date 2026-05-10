@@ -208,6 +208,261 @@ body::before {
 .stagger-5 { transition-delay: 0.5s; }
 
 /* ========================================
+   Hero Text Motion
+   ======================================== */
+
+@keyframes hero-badge-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes hero-word-in {
+  0% {
+    opacity: 0;
+    transform: translateY(0.45em);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hero-copy-line {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hero-actions-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes hero-avatar-in {
+  from {
+    opacity: 0;
+    transform: translateX(-12px) scale(0.6);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes sparkle-drift {
+  0%, 100% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(14deg) scale(1.16); }
+}
+
+.hero-badge-motion {
+  opacity: 0;
+  animation: hero-badge-in 0.72s cubic-bezier(0.2, 0.8, 0.2, 1) 0.05s forwards;
+}
+
+.hero-sparkle {
+  animation: sparkle-drift 1.1s ease-out 0.8s 2;
+}
+
+.hero-title-line {
+  display: inline-block;
+}
+
+.hero-word {
+  display: inline-block;
+  opacity: 0;
+  transform-origin: 50% 80%;
+  animation: hero-word-in 0.82s cubic-bezier(0.16, 1, 0.3, 1) var(--delay) forwards;
+}
+
+.hero-gradient-word {
+  background-size: 220% 100%;
+  animation: hero-word-in 0.82s cubic-bezier(0.16, 1, 0.3, 1) var(--delay) forwards;
+}
+
+.hero-copy-motion span {
+  display: block;
+  opacity: 0;
+  animation: hero-copy-line 0.72s ease-out forwards;
+}
+
+.hero-copy-motion span:nth-child(1) { animation-delay: 0.72s; }
+.hero-copy-motion span:nth-child(2) { animation-delay: 0.86s; }
+.hero-copy-motion span:nth-child(3) { animation-delay: 1s; }
+
+.hero-actions-motion,
+.hero-proof-motion {
+  opacity: 0;
+  animation: hero-actions-in 0.7s ease-out forwards;
+}
+
+.hero-actions-motion { animation-delay: 1.16s; }
+.hero-proof-motion { animation-delay: 1.32s; }
+
+.hero-avatar {
+  opacity: 0;
+  animation: hero-avatar-in 0.48s cubic-bezier(0.2, 0.8, 0.2, 1) var(--delay) forwards;
+}
+
+/* ========================================
+   Familiar Section Motion
+   ======================================== */
+
+@keyframes familiar-title-shine {
+  from { background-position: 0% 50%; }
+  to { background-position: 200% 50%; }
+}
+
+.familiar-heading.visible .familiar-title {
+  background: linear-gradient(90deg, #ffffff, var(--accent-teal), var(--accent-violet), #ffffff);
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: familiar-title-shine 4.5s linear infinite;
+}
+
+.familiar-subtitle {
+  transition: opacity 0.7s ease-out 0.12s, transform 0.7s ease-out 0.12s;
+}
+
+.familiar-heading:not(.visible) .familiar-subtitle {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.familiar-card {
+  position: relative;
+  overflow: hidden;
+  transform: translateY(42px) scale(0.96);
+  transition:
+    opacity 0.75s cubic-bezier(0.2, 0.8, 0.2, 1),
+    transform 0.75s cubic-bezier(0.2, 0.8, 0.2, 1),
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+@keyframes familiar-card-glare {
+  from {
+    transform: translateX(-130%) skewX(-18deg);
+  }
+  to {
+    transform: translateX(230%) skewX(-18deg);
+  }
+}
+
+.familiar-card::after {
+  content: '';
+  position: absolute;
+  top: -20%;
+  bottom: -20%;
+  left: 0;
+  width: 32%;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.13),
+    transparent
+  );
+  opacity: 0;
+  transform: translateX(-130%) skewX(-18deg);
+}
+
+.familiar-card.visible::after {
+  opacity: 1;
+  animation: familiar-card-glare 0.95s cubic-bezier(0.2, 0.8, 0.2, 1) 0.18s both;
+}
+
+.familiar-card.visible:nth-child(2)::after {
+  animation-delay: 0.3s;
+}
+
+.familiar-card.visible:nth-child(3)::after {
+  animation-delay: 0.42s;
+}
+
+.familiar-card > * {
+  position: relative;
+  z-index: 2;
+}
+
+.familiar-card.visible {
+  transform: translateY(0) scale(1);
+}
+
+.familiar-card:hover {
+  transform: translateY(-8px) scale(1.015);
+}
+
+.familiar-icon {
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.28);
+}
+
+.familiar-quote,
+.familiar-solution {
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+
+.familiar-card:not(.visible) .familiar-quote,
+.familiar-card:not(.visible) .familiar-solution {
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+.familiar-card.visible .familiar-solution {
+  transition-delay: 0.12s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-badge-motion,
+  .hero-sparkle,
+  .hero-word,
+  .hero-gradient-word,
+  .hero-copy-motion span,
+  .hero-actions-motion,
+  .hero-proof-motion,
+  .hero-avatar,
+  .familiar-heading.visible .familiar-title,
+  .familiar-card.visible .familiar-icon {
+    animation: none;
+  }
+
+  .hero-badge-motion,
+  .hero-word,
+  .hero-copy-motion span,
+  .hero-actions-motion,
+  .hero-proof-motion,
+  .hero-avatar {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+
+  .familiar-card,
+  .familiar-card:hover {
+    transform: none;
+  }
+}
+
+/* ========================================
    Glassmorphism Cards
    ======================================== */
 
@@ -228,6 +483,32 @@ body::before {
 
 .glass-card-teal:hover {
   box-shadow: var(--glow-teal);
+}
+
+.glass-card.familiar-card:hover {
+  transform: translateY(-8px) scale(1.015);
+}
+
+.product-glass-card {
+  background: rgba(18, 18, 26, 0.48);
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 24px 90px rgba(0, 0, 0, 0.28);
+}
+
+.product-glass-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.12), transparent 38%),
+    radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.08), transparent 45%);
+  opacity: 0.75;
+}
+
+.product-glass-card > * {
+  position: relative;
+  z-index: 1;
 }
 
 /* ========================================
@@ -313,6 +594,47 @@ body::before {
   border-color: rgba(0, 212, 170, 0.6);
   transform: translateY(-2px);
   box-shadow: 0 8px 30px rgba(0, 212, 170, 0.2);
+}
+
+.nav-glass-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 2.25rem;
+  padding: 0.55rem 1.05rem;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.09);
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.78rem;
+  font-weight: 700;
+  line-height: 1rem;
+  text-decoration: none;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 8px 24px rgba(0, 0, 0, 0.18);
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.nav-glass-button:hover {
+  background: rgba(255, 255, 255, 0.11);
+  border-color: rgba(255, 255, 255, 0.22);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.nav-glass-button-primary {
+  border-color: rgba(123, 97, 255, 0.72);
+  background: linear-gradient(135deg, rgba(123, 97, 255, 0.72), rgba(123, 97, 255, 0.32));
+  color: #ffffff;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    0 10px 32px rgba(123, 97, 255, 0.32);
+}
+
+.nav-glass-button-primary:hover {
+  border-color: rgba(123, 97, 255, 0.9);
+  background: linear-gradient(135deg, rgba(123, 97, 255, 0.84), rgba(123, 97, 255, 0.42));
 }
 
 /* ========================================
