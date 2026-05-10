@@ -8,6 +8,78 @@ const transition = {
   ease: "linear" as const,
 };
 
+type EngineStep = {
+  threshold: [number, number];
+  text: string;
+  desc: string;
+};
+
+const steps: EngineStep[] = [
+  {
+    threshold: [0.1, 0.25],
+    text: "Job-to-letter agents",
+    desc: "CovGen reads the role, extracts ATS signals, and turns your experience into a tailored letter.",
+  },
+  {
+    threshold: [0.35, 0.5],
+    text: "Autonomous content ops",
+    desc: "DailyContent plans, writes, schedules, and publishes posts in your voice without daily manual work.",
+  },
+  {
+    threshold: [0.6, 0.75],
+    text: "Learning feedback loop",
+    desc: "Performance signals refine future cover letters, captions, hooks, timing, and content angles.",
+  },
+];
+
+const nodeLabels = [
+  { text: "Job description", className: "left-[8%] top-[37%]" },
+  { text: "ATS keywords", className: "left-[19%] top-[49%]" },
+  { text: "Brand voice", className: "left-[10%] top-[62%]" },
+  { text: "Tone engine", className: "left-[43%] top-[51%]" },
+  { text: "Cover letters", className: "right-[12%] top-[37%]" },
+  { text: "Auto posts", className: "right-[20%] top-[49%]" },
+  { text: "Growth signals", className: "right-[9%] top-[62%]" },
+];
+
+function FloatingStepCard({
+  step,
+  scrollYProgress,
+}: {
+  step: EngineStep;
+  scrollYProgress: MotionValue<number>;
+}) {
+  const opacity = useTransform(
+    scrollYProgress,
+    [step.threshold[0] - 0.05, step.threshold[0], step.threshold[1], step.threshold[1] + 0.05],
+    [0, 1, 1, 0],
+  );
+  const y = useTransform(
+    scrollYProgress,
+    [step.threshold[0] - 0.05, step.threshold[1] + 0.05],
+    [14, -10],
+  );
+
+  return (
+    <motion.div
+      className="absolute bottom-0 left-1/2 w-[min(92vw,660px)] -translate-x-1/2 overflow-hidden rounded-2xl border border-white/15 bg-[rgba(18,18,26,0.52)] px-6 py-5 text-center shadow-[0_28px_90px_rgba(0,0,0,0.36)] backdrop-blur-2xl"
+      style={{ opacity, y }}
+    >
+      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(135deg,rgba(255,255,255,0.13),transparent_34%),radial-gradient(circle_at_50%_0%,rgba(123,97,255,0.18),transparent_48%)]" />
+      <div className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-white/35 to-transparent" />
+      <h3
+        className="relative text-[var(--accent-teal)] font-bold text-lg md:text-xl tracking-tight"
+        style={{ fontFamily: "var(--font-display)" }}
+      >
+        {step.text}
+      </h3>
+      <p className="relative text-white/72 text-sm md:text-base leading-relaxed mt-2 max-w-xl mx-auto">
+        {step.desc}
+      </p>
+    </motion.div>
+  );
+}
+
 export const GoogleGeminiEffect = ({
   pathLengths,
   title,
@@ -21,44 +93,43 @@ export const GoogleGeminiEffect = ({
   className?: string;
   scrollYProgress: MotionValue<number>;
 }) => {
-  const steps = [
-    { threshold: [0.1, 0.25], text: "Multi-Agent Coordination", desc: "Our engine synchronizes multiple specialized AI agents for complex tasks." },
-    { threshold: [0.35, 0.5], text: "Autonomous Execution", desc: "Agents perform actions, from drafting content to managing workflows, without manual input." },
-    { threshold: [0.6, 0.75], text: "Self-Optimizing Workflows", desc: "The system learns from every interaction, refining its logic for better results." },
-  ];
-
   return (
-    <div className={cn("sticky top-80", className)}>
-      <p className="text-lg md:text-7xl font-bold pb-4 text-center bg-clip-text text-transparent bg-gradient-to-b from-neutral-100 to-neutral-400" style={{ fontFamily: 'var(--font-display)' }}>
+    <div className={cn("sticky top-20 min-h-[780px] px-4", className)}>
+      <div className="pointer-events-none absolute left-1/2 top-[260px] h-[420px] w-[760px] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(123,97,255,0.22),rgba(0,212,170,0.10)_42%,transparent_68%)] blur-3xl" />
+      <div className="pointer-events-none absolute left-[18%] top-[360px] h-56 w-56 rounded-full bg-[rgba(0,212,170,0.16)] blur-[90px]" />
+      <div className="pointer-events-none absolute right-[16%] top-[330px] h-64 w-64 rounded-full bg-[rgba(123,97,255,0.18)] blur-[100px]" />
+
+      <p className="text-4xl md:text-7xl font-bold pb-4 text-center bg-clip-text text-transparent bg-gradient-to-b from-neutral-100 to-neutral-400" style={{ fontFamily: 'var(--font-display)' }}>
         {title || `Engineered for Intelligence.`}
       </p>
-      <p className="text-xs md:text-xl font-normal text-center text-neutral-400 mt-4 max-w-lg mx-auto">
+      <p className="text-sm md:text-xl font-normal text-center text-neutral-400 mt-4 max-w-xl mx-auto">
         {description ||
           `Lumevo's agentic core is the nervous system of your digital presence. Scroll to explore the architecture.`}
       </p>
 
       {/* Floating Info Labels */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none pt-80">
+      <div className="pointer-events-none absolute inset-x-0 top-[540px] z-30 h-40">
         {steps.map((step, i) => (
-          <motion.div
-            key={i}
-            className="absolute flex flex-col items-center gap-2 max-w-sm text-center px-6 py-4 rounded-2xl bg-black/40 backdrop-blur-sm border border-white/5"
-            style={{
-              opacity: useTransform(scrollYProgress, [step.threshold[0] - 0.05, step.threshold[0], step.threshold[1], step.threshold[1] + 0.05], [0, 1, 1, 0]),
-              y: useTransform(scrollYProgress, [step.threshold[0] - 0.05, step.threshold[1] + 0.05], [20, -20]),
-            }}
-          >
-            <h3 className="text-[var(--accent-teal)] font-bold text-xl md:text-2xl tracking-tight" style={{ fontFamily: 'var(--font-display)' }}>
-              {step.text}
-            </h3>
-            <p className="text-white/70 text-sm md:text-base leading-relaxed px-4">
-              {step.desc}
-            </p>
-          </motion.div>
+          <FloatingStepCard key={i} step={step} scrollYProgress={scrollYProgress} />
         ))}
       </div>
-      <div className="w-full h-[890px] -top-60 md:-top-40 flex items-center justify-center bg-transparent absolute">
-        <button className="font-bold bg-[var(--accent-violet)] text-white rounded-full md:px-6 md:py-3 px-4 py-2 md:mt-24 mt-8 z-30 md:text-base text-xs w-fit mx-auto shadow-[0_0_20px_rgba(123,97,255,0.4)] hover:shadow-[0_0_40px_rgba(123,97,255,0.6)] transition-shadow">
+
+      <div className="pointer-events-none absolute inset-x-0 top-[170px] z-20 h-[480px]">
+        {nodeLabels.map((node) => (
+          <span
+            key={node.text}
+            className={cn(
+              "absolute hidden rounded-full border border-white/10 bg-[rgba(10,10,15,0.58)] px-3 py-1 text-[11px] font-semibold text-white/72 shadow-[0_8px_30px_rgba(0,0,0,0.28)] backdrop-blur-md md:inline-flex",
+              node.className,
+            )}
+          >
+            {node.text}
+          </span>
+        ))}
+      </div>
+
+      <div className="w-full h-[560px] top-[170px] flex items-center justify-center bg-transparent absolute pointer-events-none">
+        <button className="font-bold bg-[var(--accent-violet)] text-white rounded-full md:px-6 md:py-3 px-4 py-2 z-30 md:text-base text-xs w-fit mx-auto shadow-[0_0_20px_rgba(123,97,255,0.4)]">
           lumevo.ai
         </button>
       </div>
@@ -67,7 +138,7 @@ export const GoogleGeminiEffect = ({
         height="890"
         viewBox="0 0 1440 890"
         xmlns="http://www.w3.org/2000/svg"
-        className="absolute -top-60 md:-top-40 w-full"
+        className="absolute top-[105px] left-1/2 h-[560px] w-[min(1500px,118vw)] -translate-x-1/2"
       >
         <motion.path
           d="M0 663C145.5 663 191 666.265 269 647C326.5 630 339.5 621 397.5 566C439 531.5 455 529.5 490 523C509.664 519.348 521 503.736 538 504.236C553.591 504.236 562.429 514.739 584.66 522.749C592.042 525.408 600.2 526.237 607.356 523.019C624.755 515.195 641.446 496.324 657 496.735C673.408 496.735 693.545 519.572 712.903 526.769C718.727 528.934 725.184 528.395 730.902 525.965C751.726 517.115 764.085 497.106 782 496.735C794.831 496.47 804.103 508.859 822.469 518.515C835.13 525.171 850.214 526.815 862.827 520.069C875.952 513.049 889.748 502.706 903.5 503.736C922.677 505.171 935.293 510.562 945.817 515.673C954.234 519.76 963.095 522.792 972.199 524.954C996.012 530.611 1007.42 534.118 1034 549C1077.5 573.359 1082.5 594.5 1140 629C1206 670 1328.5 662.5 1440 662.5"

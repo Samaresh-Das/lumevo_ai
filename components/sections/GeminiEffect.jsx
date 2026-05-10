@@ -18,7 +18,7 @@ export default function GeminiEffect() {
   const pathLengthFifth = useTransform(scrollYProgress, [0, 0.8], [0, 1.2]);
 
   return (
-    <section id="ai-engine">
+    <section id="ai-engine" className="relative">
       <div
         className="h-[400vh] bg-[var(--background)] w-full relative pt-40 overflow-clip"
         ref={ref}

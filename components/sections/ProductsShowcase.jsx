@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { GalaxyHeroBackground } from "@/components/blocks/galaxy-hero-background";
 import {
   CheckCircle2,
   Clock,
@@ -56,13 +57,30 @@ export default function ProductsShowcase() {
       id="products"
       className="section-padding relative overflow-hidden"
     >
+      <div className="absolute inset-0 z-0 pointer-events-none opacity-70">
+        <GalaxyHeroBackground height="100%" interactive={false} />
+      </div>
+      <div className="absolute inset-0 z-[1] pointer-events-none bg-[rgba(10,10,15,0.50)]" />
+      <div
+        className="absolute inset-x-0 top-0 z-[2] h-40 pointer-events-none"
+        style={{
+          background: "linear-gradient(to bottom, var(--background), transparent)",
+        }}
+      />
+      <div
+        className="absolute inset-x-0 bottom-0 z-[2] h-40 pointer-events-none"
+        style={{
+          background: "linear-gradient(to top, var(--background), transparent)",
+        }}
+      />
+
       {/* Background meshes */}
       <div
-        className="mesh-gradient mesh-violet"
+        className="mesh-gradient mesh-violet z-[3]"
         style={{ width: "600px", height: "600px", top: "20%", left: "-15%" }}
       />
       <div
-        className="mesh-gradient mesh-teal"
+        className="mesh-gradient mesh-teal z-[3]"
         style={{ width: "400px", height: "400px", bottom: "10%", right: "-10%" }}
       />
 
@@ -83,7 +101,7 @@ export default function ProductsShowcase() {
         {/* Product Cards */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* CovGen Card */}
-          <div className="animate-on-scroll stagger-1 glass-card p-8 md:p-10 relative overflow-hidden group">
+          <div className="animate-on-scroll stagger-1 glass-card product-glass-card p-8 md:p-10 relative overflow-hidden group">
             {/* Glow accent */}
             <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[var(--accent-violet)] to-[#A78BFA] opacity-60 group-hover:opacity-100 transition-opacity" />
 
@@ -131,7 +149,7 @@ export default function ProductsShowcase() {
           </div>
 
           {/* DailyContent Card */}
-          <div className="animate-on-scroll stagger-2 glass-card glass-card-teal p-8 md:p-10 relative overflow-hidden group">
+          <div className="animate-on-scroll stagger-2 glass-card glass-card-teal product-glass-card p-8 md:p-10 relative overflow-hidden group">
             {/* Glow accent */}
             <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[var(--accent-teal)] to-[#34D399] opacity-60 group-hover:opacity-100 transition-opacity" />
 

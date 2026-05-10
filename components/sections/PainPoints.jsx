@@ -59,15 +59,15 @@ export default function PainPoints() {
 
       <div className="max-w-6xl mx-auto">
         {/* Section Title */}
-        <div className="text-center mb-16 animate-on-scroll">
+        <div className="text-center mb-16 animate-on-scroll familiar-heading">
           <h2
-            className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4"
+            className="familiar-title text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4"
             style={{ fontFamily: "var(--font-display)" }}
           >
             Sound familiar?
           </h2>
-          <p className="text-[var(--text-secondary)] text-lg max-w-xl mx-auto">
-            You're not alone. These are the problems Lumevo AI was built to solve.
+          <p className="familiar-subtitle text-[var(--text-secondary)] text-lg max-w-xl mx-auto">
+            You&apos;re not alone. These are the problems Lumevo AI was built to solve.
           </p>
         </div>
 
@@ -78,22 +78,22 @@ export default function PainPoints() {
             return (
               <div
                 key={i}
-                className={`animate-on-scroll stagger-${i + 1} glass-card p-8 group cursor-default`}
+                className={`animate-on-scroll stagger-${i + 1} familiar-card glass-card p-8 group cursor-default`}
               >
                 {/* Icon */}
                 <div
-                  className={`w-12 h-12 rounded-xl bg-gradient-to-br ${point.gradient} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}
+                  className={`familiar-icon w-12 h-12 rounded-xl bg-gradient-to-br ${point.gradient} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}
                 >
                   <Icon size={22} className="text-white" />
                 </div>
 
                 {/* Pain text */}
-                <p className="text-white font-semibold text-lg leading-snug mb-4">
+                <p className="familiar-quote text-white font-semibold text-lg leading-snug mb-4">
                   &quot;{point.pain}&quot;
                 </p>
 
                 {/* Solution */}
-                <p className="text-[var(--text-secondary)] text-sm leading-relaxed">
+                <p className="familiar-solution text-[var(--text-secondary)] text-sm leading-relaxed">
                   → <span className="text-[var(--accent-teal)] font-medium">{point.solution}</span>
                 </p>
               </div>
